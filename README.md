@@ -188,8 +188,7 @@ The LPS tool through the iteration modes provides significant flexibility in how
 
 ## Dashboard
 
-The LPS tool provides a dashboard that allows users to monitor metrics for their testing endpoints. These metrics cover response time, response breakdown, request rate, and connection metrics.
-
-![image](https://github.com/mohaidr/lps-tool/assets/5898514/a090e5ef-06dd-47e6-9070-e06da652d8c1)
+The LPS tool features a dashboard that enables users to effectively monitor and analyze key metrics for their testing endpoints. These metrics include response time, response breakdown, request rate, and connection metrics, offering comprehensive insights for optimal performance monitoring.
+   ![image](https://github.com/mohaidr/lps-tool/assets/5898514/a090e5ef-06dd-47e6-9070-e06da652d8c1)
 
 
