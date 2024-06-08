@@ -43,7 +43,7 @@ These modes allow testers to closely replicate various real-world user behaviors
 
 This base command initiates a variety of testing scenarios that can be run immediately without the need to save the test configuration. The behavior of the test is determined by the options specified.
 
-### Example
+### Quick Test Examples
 `lps --url https://www.example.com -rc 1000`
 
 `lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Inline Payload"`
