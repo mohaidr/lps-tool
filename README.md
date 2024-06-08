@@ -6,7 +6,7 @@ The LPS tool is designed for Load, Performance, and Stress testing of web applic
 The LPS tool is distinctively built around the concept of iteration modes, setting it apart from other testing tools. This design choice emphasizes flexibility and ease of use, allowing users to run diverse testing scenarios by simply specifying a few key parameters. The iteration modes are central to the tool's functionality, offering a robust way to customize how HTTP requests are issued during tests.
 
 ### Installation 
-- Download the most recent version of the LPS tool.
+- Download the latest version of the LPS tool from the versions directory.
 - Save it in your desired directory.
 - Open a terminal as administrator and run the env.ps1 file.
 - You can now utilize the lps command from any directory.
