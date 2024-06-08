@@ -5,6 +5,12 @@ The LPS tool is designed for Load, Performance, and Stress testing of web applic
 
 The LPS tool is distinctively built around the concept of iteration modes, setting it apart from other testing tools. This design choice emphasizes flexibility and ease of use, allowing users to run diverse testing scenarios by simply specifying a few key parameters. The iteration modes are central to the tool's functionality, offering a robust way to customize how HTTP requests are issued during tests.
 
+### Installation 
+- Download the most recent version of the LPS tool.
+- Save it in your desired directory.
+- Open a terminal and run the env.ps1 file.
+- You can now utilize the lps command from any directory.
+
 ### What is an Iteration Mode?
 Iteration Mode is a fundamental feature of the LPS tool that dictates the pattern and timing of HTTP requests during a test. This mode allows users to precisely model different user interactions and system loads by managing the sequence and behavior of requests. The Iteration Mode specifies how HTTP requests are structured and executed during a test run, allowing you to mimic different user interaction patterns and system loads, it adjusts the sequencing and timing of requests based on predefined behaviors. 
 
@@ -181,4 +187,9 @@ The LPS tool through the iteration modes provides significant flexibility in how
 
 
 ## Dashboard
-![image](https://github.com/mohaidr/lps-tool/assets/5898514/d9cfb9f3-14d3-4f07-8f60-8624d8093684)
+
+The LPS tool provides a dashboard that allows users to monitor metrics for their testing endpoints. These metrics cover response time, response breakdown, request rate, and connection metrics.
+
+![image](https://github.com/mohaidr/lps-tool/assets/5898514/a090e5ef-06dd-47e6-9070-e06da652d8c1)
+
+
