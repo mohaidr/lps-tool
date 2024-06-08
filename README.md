@@ -9,8 +9,8 @@ The LPS tool is distinctively built around the concept of iteration modes, setti
 - Download the latest version of the LPS tool from the versions directory.
 - Save it in your desired directory.
 - Open a terminal as administrator and run the env.ps1 file.
-    - If script execution is restricted, you might need to use the command Set-ExecutionPolicy RemoteSigned to enable it.
-    - To restore the original settings, use the command Set-ExecutionPolicy Restricted.
+    - If script execution is restricted, you might need to use the command `Set-ExecutionPolicy RemoteSigned` to enable it.
+    - To restore the original settings, use the command `Set-ExecutionPolicy Restricted`.
 - You can now utilize the lps command from any directory.
 
 ### What is an Iteration Mode?
