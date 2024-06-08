@@ -6,9 +6,11 @@ The LPS tool is designed for Load, Performance, and Stress testing of web applic
 The LPS tool is distinctively built around the concept of iteration modes, setting it apart from other testing tools. This design choice emphasizes flexibility and ease of use, allowing users to run diverse testing scenarios by simply specifying a few key parameters. The iteration modes are central to the tool's functionality, offering a robust way to customize how HTTP requests are issued during tests.
 
 ### Installation 
-- Download the most recent version of the LPS tool.
+- Download the latest version of the LPS tool from the versions directory.
 - Save it in your desired directory.
 - Open a terminal as administrator and run the env.ps1 file.
+    - If script execution is restricted, you might need to use the command `Set-ExecutionPolicy RemoteSigned` to enable it.
+    - To restore the original settings, use the command `Set-ExecutionPolicy Restricted`.
 - You can now utilize the lps command from any directory.
 
 ### What is an Iteration Mode?
@@ -41,9 +43,14 @@ These modes allow testers to closely replicate various real-world user behaviors
 
 This base command initiates a variety of testing scenarios that can be run immediately without the need to save the test configuration. The behavior of the test is determined by the options specified.
 
-### Example
+### Quick Test Examples
 `lps --url https://www.example.com -rc 1000`
 
+`lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Inline Payload"`
+
+`lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Path:C:\Users\User\Desktop\LPS\urnice.json"`
+
+`lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "URL:https://www.example.com/payload"`
 
 #### Options:
     -tn, --testname <testname>: Specifies the test name, defaults to "Quick-Test-Plan".
@@ -188,8 +195,11 @@ The LPS tool through the iteration modes provides significant flexibility in how
 
 ## Dashboard
 
-The LPS tool provides a dashboard that allows users to monitor metrics for their testing endpoints. These metrics cover response time, response breakdown, request rate, and connection metrics.
+The LPS tool features a dashboard that enables users to effectively monitor and analyze key metrics for their testing endpoints. These metrics include response time, response breakdown, request rate, and connection metrics, offering comprehensive insights for optimal performance monitoring.
 
-![image](https://github.com/mohaidr/lps-tool/assets/5898514/a090e5ef-06dd-47e6-9070-e06da652d8c1)
+![image](https://github.com/mohaidr/lps-tool/assets/5898514/312240c2-ae41-40ab-8bd2-75ef10fca54a)
+
+
+
 
 
