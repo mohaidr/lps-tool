@@ -8,7 +8,7 @@ The LPS tool is distinctively built around the concept of iteration modes, setti
 ### Installation 
 - Download the most recent version of the LPS tool.
 - Save it in your desired directory.
-- Open a terminal and run the env.ps1 file.
+- Open a terminal as administrator and run the env.ps1 file.
 - You can now utilize the lps command from any directory.
 
 ### What is an Iteration Mode?
