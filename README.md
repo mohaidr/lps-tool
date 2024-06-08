@@ -45,8 +45,11 @@ This base command initiates a variety of testing scenarios that can be run immed
 
 ### Example
 `lps --url https://www.example.com -rc 1000`
+
 `lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Inline Payload"`
+
 `lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Path:C:\Users\User\Desktop\LPS\urnice.json"`
+
 `lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "URL:https://www.example.com/payload"`
 
 #### Options:
