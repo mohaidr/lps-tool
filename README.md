@@ -181,11 +181,92 @@ Manages the watchdog mechanism that monitors and controls resource usage during 
     -cdrtis, --coolDownRetryTimeInSeconds <coolDownRetryTimeInSeconds>: Interval for checking if the test can be resumed.
     -sm, --suspensionMode <All|Any>: Decides whether to pause the test when all or any thresholds are exceeded.
 
-### HelpHelp
+### Help
 **For additional details on command usage and options:**
 `lps -?, -h`
 
 This help command will provide comprehensive usage information for the LPS tool or any specific command.
+
+## Test Plans
+
+Test plans and HTTP runs are saved in a JSON file for future use. This file is stored in the directory where the `create` command is executed, allowing for manual updating or creation of test plans if you choose not to use the command-line tool.
+
+	{
+	  "lpsHttpRuns": [
+		{
+		  "lpsRequestProfile": {
+			"id": null,
+			"httpMethod": "GET",
+			"url": "http://www.example.sub.net/",
+			"payload": null,
+			"httpversion": "2.0",
+			"httpHeaders": {},
+			"downloadHtmlEmbeddedResources": false,
+			"saveResponse": false,
+			"isValid": true
+		  },
+		  "id": null,
+		  "requestCount": 1000,
+		  "duration": null,
+		  "batchSize": 100,
+		  "coolDownTime": 3,
+		  "name": "Example-Sub-Run",
+		  "isValid": true,
+		  "mode": 1
+		},
+		{
+		  "lpsRequestProfile": {
+			"id": null,
+			"httpMethod": "GET",
+			"url": "http://www.example.com",
+			"payload": null,
+			"httpversion": "2.0",
+			"httpHeaders": {},
+			"downloadHtmlEmbeddedResources": false,
+			"saveResponse": false,
+			"isValid": true
+		  },
+		  "id": null,
+		  "requestCount": 200,
+		  "duration": null,
+		  "batchSize": 100,
+		  "coolDownTime": 5,
+		  "name": "Example",
+		  "isValid": true,
+		  "mode": 1
+		},
+		{
+		  "lpsRequestProfile": {
+			"id": null,
+			"httpMethod": "GET",
+			"url": "http://example.net/test",
+			"payload": null,
+			"httpversion": "2.0",
+			"httpHeaders": {},
+			"downloadHtmlEmbeddedResources": false,
+			"saveResponse": false,
+			"isValid": true
+		  },
+		  "id": null,
+		  "requestCount": null,
+		  "duration": null,
+		  "batchSize": 10,
+		  "coolDownTime": 20,
+		  "name": "Example-Test",
+		  "isValid": true,
+		  "mode": 2
+		}
+	  ],
+	  "id": null,
+	  "name": "Hello-Test",
+	  "numberOfClients": 2,
+	  "rampUpPeriod": 1,
+	  "delayClientCreationUntilIsNeeded": false,
+	  "runInParallel": true,
+	  "isValid": true
+	}
+
+
 
 
 
