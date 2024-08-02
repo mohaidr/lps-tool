@@ -9,7 +9,7 @@ The LPS tool is distinctively built around the concept of iteration modes, setti
 - Download the latest version of the LPS tool from the [versions](https://github.com/mohaidr/lps-tool/tree/main/Version) directory.
 - Save it in your desired directory.
 - Open a terminal as administrator and run the env.ps1 file.
-    - If script execution is restricted, you might need to use the command `Set-ExecutionPolicy RemoteSigned` to enable it.
+    - If script execution is restricted, you might need to use the command `Set-ExecutionPolicy Unrestricted` to enable it.
     - To restore the original settings, use the command `Set-ExecutionPolicy Restricted`.
 - You can now utilize the lps command from any directory.
 
@@ -51,6 +51,12 @@ This base command initiates a variety of testing scenarios that can be run immed
 `lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Path:C:\Users\User\Desktop\LPS\urnice.json"`
 
 `lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "URL:https://www.example.com/payload"`
+
+
+### Running On Mac and Linux
+- Instal .net 8 Runtime for [Mac](https://learn.microsoft.com/en-us/dotnet/core/install/macos) or [Linux](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install?tabs=dotnet8&pivots=os-linux-ubuntu-2404)
+- Run the application using the dotnet command: dotnet LPS.dll.
+- You can also run the commands using dotnet LPS.dll [options], for example: dotnet LPS.dll run -tn Hello-Test.
 
 #### Options:
     -tn, --testname <testname>: Specifies the test name, defaults to "Quick-Test-Plan".
@@ -192,80 +198,90 @@ This help command will provide comprehensive usage information for the LPS tool 
 Test plans and HTTP runs are saved in a JSON file for future use. This file is stored in the directory where the `create` command is executed, allowing for manual updating or creation of test plans if you choose not to use the command-line tool.
 
 	{
-	  "lpsHttpRuns": [
-		{
-		  "lpsRequestProfile": {
-			"id": null,
-			"httpMethod": "GET",
-			"url": "http://www.example.sub.net/",
-			"payload": null,
-			"httpversion": "2.0",
-			"httpHeaders": {},
-			"downloadHtmlEmbeddedResources": false,
-			"saveResponse": false,
-			"isValid": true
-		  },
-		  "id": null,
-		  "requestCount": 1000,
-		  "duration": null,
-		  "batchSize": 100,
-		  "coolDownTime": 3,
-		  "name": "Example-Sub-Run",
-		  "isValid": true,
-		  "mode": 1
-		},
-		{
-		  "lpsRequestProfile": {
-			"id": null,
-			"httpMethod": "GET",
-			"url": "http://www.example.com",
-			"payload": null,
-			"httpversion": "2.0",
-			"httpHeaders": {},
-			"downloadHtmlEmbeddedResources": false,
-			"saveResponse": false,
-			"isValid": true
-		  },
-		  "id": null,
-		  "requestCount": 200,
-		  "duration": null,
-		  "batchSize": 100,
-		  "coolDownTime": 5,
-		  "name": "Example",
-		  "isValid": true,
-		  "mode": 1
-		},
-		{
-		  "lpsRequestProfile": {
-			"id": null,
-			"httpMethod": "GET",
-			"url": "http://example.net/test",
-			"payload": null,
-			"httpversion": "2.0",
-			"httpHeaders": {},
-			"downloadHtmlEmbeddedResources": false,
-			"saveResponse": false,
-			"isValid": true
-		  },
-		  "id": null,
-		  "requestCount": null,
-		  "duration": null,
-		  "batchSize": 10,
-		  "coolDownTime": 20,
-		  "name": "Example-Test",
-		  "isValid": true,
-		  "mode": 2
-		}
-	  ],
-	  "id": null,
-	  "name": "Hello-Test",
-	  "numberOfClients": 2,
-	  "rampUpPeriod": 1,
-	  "delayClientCreationUntilIsNeeded": false,
-	  "runInParallel": true,
-	  "isValid": true
+		"lpsRuns": [
+			{
+				"lpsRequestProfile": {
+					"id": null,
+					"httpMethod": "GET",
+					"url": "https://urnice.azure-api.net/echo/resource",
+					"payload": null,
+					"httpversion": "2.0",
+					"httpHeaders": {
+						"Hello-Header": "Hello-Header"
+					},
+					"downloadHtmlEmbeddedResources": false,
+					"saveResponse": false,
+					"isValid": true,
+					"validationErrors": {}
+				},
+				"id": null,
+				"requestCount": null,
+				"duration": 15,
+				"batchSize": null,
+				"coolDownTime": null,
+				"name": "Urnice",
+				"isValid": true,
+				"mode": 4,
+				"validationErrors": {}
+			},
+			{
+				"lpsRequestProfile": {
+					"id": null,
+					"httpMethod": "GET",
+					"url": "https://www.example.com",
+					"payload": null,
+					"httpversion": "2.0",
+					"httpHeaders": {
+						"Hello-Header": "Hello-Header"
+					},
+					"downloadHtmlEmbeddedResources": false,
+					"saveResponse": false,
+					"isValid": true,
+					"validationErrors": {}
+				},
+				"id": null,
+				"requestCount": null,
+				"duration": 500,
+				"batchSize": null,
+				"coolDownTime": null,
+				"name": "Example",
+				"isValid": true,
+				"mode": 4,
+				"validationErrors": {}
+			},
+			{
+				"lpsRequestProfile": {
+					"id": null,
+					"httpMethod": "GET",
+					"url": "https://www.example.com/resource",
+					"payload": null,
+					"httpversion": "2.0",
+					"httpHeaders": {},
+					"downloadHtmlEmbeddedResources": false,
+					"saveResponse": false,
+					"isValid": true,
+					"validationErrors": {}
+				},
+				"id": null,
+				"requestCount": 500,
+				"duration": null,
+				"batchSize": null,
+				"coolDownTime": null,
+				"name": "Hello-Run-2",
+				"isValid": true,
+				"mode": 3,
+				"validationErrors": {}
+			}
+		],
+		"id": null,
+		"name": "Example-Resource",
+		"numberOfClients": 1,
+		"rampUpPeriod": 0,
+		"delayClientCreationUntilIsNeeded": false,
+		"runInParallel": false,
+		"isValid": true,
+		"validationErrors": {}
 	}
-
 
 
 
@@ -278,9 +294,7 @@ The LPS tool through the iteration modes provides significant flexibility in how
 
 The LPS tool features a dashboard that enables users to effectively monitor and analyze key metrics for their testing endpoints. These metrics include response time, response breakdown, request rate, and connection metrics, offering comprehensive insights for optimal performance monitoring.
 
-![image](https://github.com/mohaidr/lps-tool/assets/5898514/312240c2-ae41-40ab-8bd2-75ef10fca54a)
-
-
-
-
-
+![4](https://github.com/user-attachments/assets/c216fcd8-0f21-4183-9854-41ac7b6adff9)
+![3](https://github.com/user-attachments/assets/f37a025d-9840-4026-95b0-fea080252160)
+![2](https://github.com/user-attachments/assets/d6f30507-ccec-4f76-a05a-8dc3359d2f49)
+![1](https://github.com/user-attachments/assets/f44b88da-1b5b-4235-9f1d-b077465f9116)
