@@ -57,6 +57,8 @@ This base command initiates a variety of testing scenarios that can be run immed
 - Instal .net 8 Runtime for [Mac](https://learn.microsoft.com/en-us/dotnet/core/install/macos) or [Linux](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install?tabs=dotnet8&pivots=os-linux-ubuntu-2404)
 - Run the application using the dotnet command: dotnet LPS.dll.
 - You can also run the commands using dotnet LPS.dll [options], for example: dotnet LPS.dll run -tn Hello-Test.
+- If the dashboard does not open automatically, please open it manually by visiting the following link: http://127.0.0.1:59444 to view your test results.
+- You can also create your own dashboard to view the test results. The Metrics API is accessible at http://127.0.0.1:59444/api/metrics or http://[your local IP]:59444/api/metrics.
 
 #### Options:
     -tn, --testname <testname>: Specifies the test name, defaults to "Quick-Test-Plan".
