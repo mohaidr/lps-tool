@@ -296,7 +296,5 @@ The LPS tool through the iteration modes provides significant flexibility in how
 
 The LPS tool features a dashboard that enables users to effectively monitor and analyze key metrics for their testing endpoints. These metrics include response time, response breakdown, request rate, and connection metrics, offering comprehensive insights for optimal performance monitoring.
 
-![4](https://github.com/user-attachments/assets/c216fcd8-0f21-4183-9854-41ac7b6adff9)
-![3](https://github.com/user-attachments/assets/f37a025d-9840-4026-95b0-fea080252160)
-![2](https://github.com/user-attachments/assets/d6f30507-ccec-4f76-a05a-8dc3359d2f49)
-![1](https://github.com/user-attachments/assets/f44b88da-1b5b-4235-9f1d-b077465f9116)
+![image](https://github.com/user-attachments/assets/3b8ad978-d89d-41b6-afec-dc0e7468ab23)
+![image](https://github.com/user-attachments/assets/4d7a43a0-c919-4a73-aebc-fd97277f05df)
