@@ -8,6 +8,7 @@ The LPS tool is distinctively built around the concept of iteration modes, setti
 ### Installation 
 - Download the latest version of the LPS tool from the [versions](https://github.com/mohaidr/lps-tool/tree/main/Version) directory.
 - Save it in your desired directory.
+- Install [ASP.NET Core Runtime 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) for Windows
 - Open a terminal as administrator and run the env.ps1 file.
     - If script execution is restricted, you might need to use the command `Set-ExecutionPolicy Unrestricted` to enable it.
     - To restore the original settings, use the command `Set-ExecutionPolicy Restricted`.
