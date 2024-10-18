@@ -83,7 +83,7 @@ This base command initiates a variety of testing scenarios that can be run immed
     -bs, --batchsize <batchsize>: Number of requests per batch.
     -hv, --httpVersion, --httpversion <httpVersion>: HTTP version, defaults to 2.0.
     -sr, --saveResponse: Decides if the HTTP responses should be saved. Default is false. The functionality only saves sample responses, a response every 30 seconds.
-	-dhtmler, --downloadHtmlEmbeddedResources, --downloadhtmlembeddedresources: Option to download HTML embedded resources, defaults to False. Note that extracted URLs are cached for up to 30 seconds to prevent performance issues that could affect the load test.
+	-dhtmler, --downloadHtmlEmbeddedResources, --downloadhtmlembeddedresources: Option to download HTML embedded resources, defaults to False. 
     -p, --payload, --Payload <payload>: Request payload, can be a path to a file or inline text.
 
 
@@ -130,7 +130,7 @@ This command adds an HTTP run to an existing test plan. It configures key aspect
     -u, --url <url>: Required. The target URL for the HTTP requests.
 	-mt, --maximizeThroughput, --maximizethroughput: Maximizing test throughput. Maximizing the throughput will result in higher CPU and Memory usage [default: False]
     -sr, --saveResponse: Decides if the HTTP responses should be saved. Default is false. The functionality only saves sample responses, a response every 30 seconds.
-	-dhtmler, --downloadHtmlEmbeddedResources, --downloadhtmlembeddedresources: Option to download HTML embedded resources, defaults to False. Note that extracted URLs are cached for up to 30 seconds to prevent performance issues that could affect the load test.
+	-dhtmler, --downloadHtmlEmbeddedResources, --downloadhtmlembeddedresources: Option to download HTML embedded resources, defaults to False.
     -h, --header <header>: Adds custom headers to the HTTP requests.
     -p, --payload <payload>: Provides the data sent with the request, either from a file or as inline text.
 
