@@ -6,7 +6,7 @@
   **Note:** Maximizing throughput may result in increased CPU and memory usage.
 - **MaxCoolingPeriod and ResumeCoolingAfter Features:** Introduced two new watchdog features to improve system resilience during cooling periods:
   - **MaxCoolingPeriod (`maxcp`, `--maxcoolingperiod`, `--MAXCOOLINGPERIOD <maxcoolingperiod>`):** This feature sets the maximum cooling period in seconds to prevent the system from being stuck in a never-resuming state. After the specified time, cooling will cease regardless of resource conditions.
-  - **ResumeCoolingAfter (`rca`, `--resumecoolingafter`, `--RESUMECOOLINGAFTER <resumecoolingafter>`):** This feature allows the system to resume cooling after a defined period (in seconds), even if resources are still above the threshold. This ensures controlled cooling cycles and prevents unnecessary system stress.
+  - **ResumeCoolingAfter (`rca`, `--resumecoolingafter`, `--RESUMECOOLINGAFTER <resumecoolingafter>`):** This feature allows the system to resume cooling after a defined period (in seconds), if resources are still above the threshold. This ensures controlled cooling cycles and prevents unnecessary system stress.
 - **Customizable Cool Down Time:** **(Breaking Change)** Updated cool down time configuration to accept milliseconds instead of seconds.
 
 ### Enhancements:
