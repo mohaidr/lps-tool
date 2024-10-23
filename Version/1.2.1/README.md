@@ -3,7 +3,7 @@
 ### Overview
 The LPS tool is designed for Load, Performance, and Stress testing of web applications. It allows users to design, manage, and execute a variety of HTTP-based tests to assess application performance under simulated load conditions.
 
-> **Warning:** This documentation is applicable starting from version 1.2.1 of the LPS tool. For documentation on earlier versions, please refer to the `readme.md` files located within each version's directory on our [repository](https://github.com/mohaidr/lps-tool/tree/main/Version).
+> **Warning:** This documentation is applicable starting from version 1.2.0 of the LPS tool. For documentation on earlier versions, please refer to the `readme.md` files located within each version's directory on our [repository](https://github.com/mohaidr/lps-tool/tree/main/Version).
 
 
 The LPS tool is distinctively built around the concept of iteration modes, setting it apart from other testing tools. This design choice emphasizes flexibility and ease of use, allowing users to run diverse testing scenarios by simply specifying a few key parameters. The iteration modes are central to the tool's functionality, offering a robust way to customize how HTTP requests are issued during tests.
