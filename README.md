@@ -17,6 +17,9 @@ The LPS Tool is your all-in-one solution for ensuring application reliability an
     - To restore the original settings, use the command `Set-ExecutionPolicy Restricted`.
 - You can now utilize the lps command from any directory.
 
+## LPS Docs
+ ### The LPS Docs can be fond from [here](https://github.com/mohaidr/lps-docs/tree/main)
+ 
 ## Related Items
    - [Commands](https://github.com/mohaidr/lps-docs/blob/main/articles/1.Commands.md)
    - [Articles](https://github.com/mohaidr/lps-docs/tree/main/articles)
