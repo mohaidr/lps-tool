@@ -1,4 +1,4 @@
-> **Warning:** This documentation is applicable starting from version 2.0_Preview of the LPS tool. For documentation on earlier versions, please refer to the `readme.md` files located within each version's directory on our [repository](https://github.com/mohaidr/lps-tool/tree/main/Version). Please note that this version is not backward compatible.
+> **Warning:** This documentation is applicable starting from version 2.0_Preview of the LPS tool. For documentation on earlier versions, please refer to the `readme.md` files located within each version's directory on our [repository](https://github.com/mohaidr/lps-tool/tree/main/Version). Please note that 2.x is not backward compatible with 1.x.
 
 # Introduction
 
