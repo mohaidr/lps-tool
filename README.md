@@ -42,6 +42,9 @@ lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "URL:ht
 ```
 **Description**: Sends 1000 POST requests with a payload fetched from a URL.
 
+## Distributed Load Testing
+The distributed load testing is supported starting from 2.0.2_preview version. Check the article from [here](https://github.com/mohaidr/lps-docs/blob/main/articles/9.DistributedLoadTesting.md)
+
 ---
 
 
