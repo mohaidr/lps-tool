@@ -1,57 +1,109 @@
-> **Warning:** This documentation is applicable starting from version 2.0_Preview of the LPS tool. For documentation on earlier versions, please refer to the `readme.md` files located within each version's directory on our [repository](https://github.com/mohaidr/lps-tool/tree/main/Version). Please note that 2.x is not backward compatible with 1.x.
 
-# Introduction
+# 🚨 Important Notice
 
-The **LPS Tool** (Load, Performance, and Stress Testing Command Tool) is a versatile and powerful framework designed for evaluating the performance and resilience of web applications under simulated load conditions. By leveraging HTTP-based tests, the tool enables users to assess system behavior, scalability, and endurance with precision.
-
-Built around the innovative concept of **Rounds** and **Iterations**, the LPS Tool introduces highly customizable **Iteration Modes** to replicate real-world user interaction patterns and varying traffic loads. With its intuitive configuration, robust feature set, and focus on flexibility, the tool empowers developers and QA engineers to design, execute, and analyze complex testing scenarios effortlessly.
-
-The LPS Tool is your all-in-one solution for ensuring application reliability and performance under diverse and challenging conditions.
-
-### Installation 
-- Download the latest version of the LPS tool from the [versions](https://github.com/mohaidr/lps-tool/tree/main/Version) directory.
-- Save it in your desired directory.
-- Install [ASP.NET Core Runtime 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-- On windows machines, Open a terminal as administrator and run the env.ps1 file.
-    - If script execution is restricted, you might need to use the command `Set-ExecutionPolicy Unrestricted` to enable it.
-    - To restore the original settings, use the command `Set-ExecutionPolicy Restricted`.
-- You can now utilize the lps command from any directory.
-
-## Quick Test Example
-### Simple GET Request
-```bash
-lps --url https://www.example.com -rc 1000
-```
-**Description**: Sends 1000 GET requests to the specified URL.
-
-### POST Request with Inline Payload
-```bash
-lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Inline Payload"
-```
-**Description**: Sends 1000 POST requests with an inline payload.
-
-### POST Request with File Payload
-```bash
-lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Path:C:\Users\User\Desktop\LPS\urnice.json"
-```
-**Description**: Sends 1000 POST requests with a payload from a file.
-
-### POST Request with Payload URL
-```bash
-lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "URL:https://www.example.com/payload"
-```
-**Description**: Sends 1000 POST requests with a payload fetched from a URL.
-
-## Distributed Load Testing
-The distributed load testing is supported starting from 2.0.2_preview version. Check the article from [here](https://github.com/mohaidr/lps-docs/blob/main/articles/9.DistributedLoadTesting.md)
+> **⚠️ Warning:** This documentation applies **only** to **version 2.0_Preview** of the **LPS Tool**.
+> For earlier versions, please visit the [`readme.md`](https://github.com/mohaidr/lps-tool/tree/main/Version) in each version's directory.
+> 
+> ⚠️ **Note:** Version **2.x is NOT backward compatible** with 1.x.
 
 ---
 
+# 🚀 Introduction
 
-## LPS Docs
- ### The LPS Docs can be fond from [here](https://github.com/mohaidr/lps-docs/tree/main)
+Welcome to the **LPS Tool** – your ultimate companion for **Load**, **Performance**, and **Stress** testing!
 
-   - [Commands](https://github.com/mohaidr/lps-docs/blob/main/articles/1.Commands.md)
-   - [Articles](https://github.com/mohaidr/lps-docs/tree/main/articles)
-   - [Concepts](https://github.com/mohaidr/lps-docs/tree/main/concepts)
-   - [Examples](https://github.com/mohaidr/lps-docs/tree/main/examples)
+🛠️ The **LPS Tool** (Load, Performance, and Stress Testing Command Tool) is a flexible framework for testing your web application's performance under simulated load.
+
+### 🌟 Key Highlights
+- 🔁 Built on [**Rounds**](https://github.com/mohaidr/lps-docs/blob/main/concepts/1.Rounds.md) and [**Iterations**](https://github.com/mohaidr/lps-docs/blob/main/concepts/2.Iterations.md) for structured testing
+- 🎛️ Offers flexible [**Iteration Modes**](https://github.com/mohaidr/lps-docs/blob/main/concepts/3.Iteration_Modes.md) to simulate real-world traffic
+- 📊 Helps evaluate system **scalability**, **endurance**, and **resilience**
+- ⚙️ Empowers developers and QA engineers with powerful testing scenarios
+
+---
+
+# 💻 Installation Guide
+
+🧭 **LPS Tool is cross-platform** – it works on **Windows**, **Linux**, and **macOS**!
+
+### 🛠️ Steps to Install:
+1. ⬇️ Download the latest version of LPS Tool from the [Versions Directory](https://github.com/mohaidr/lps-tool/tree/main/Version)
+2. 📂 Save it to your desired directory
+3. 🧩 Install [.NET 8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+
+### 🖥️ Optional:
+To use the `lps` command from any directory:
+
+#### 🪟 On Windows:
+- Open **Terminal as Administrator**
+- Run the `env.ps1` script
+- If script execution is restricted, enable it with:
+  ```powershell
+  Set-ExecutionPolicy Unrestricted
+  ```
+- To restore the default setting:
+  ```powershell
+  Set-ExecutionPolicy Restricted
+  ```
+
+#### 🐧 On Linux/macOS:
+- Run the `env.sh` script in your terminal:
+  ```bash
+  source ./env.sh
+  ```
+
+4. ✅ Done! You can now use `lps` from any directory.
+
+---
+
+# ⚡ Quick Test Examples
+
+### 1️⃣ Simple GET Request
+```bash
+lps --url https://www.example.com -rc 1000
+```
+📎 **Sends 1000 GET requests** to the specified URL
+
+---
+
+### 2️⃣ POST Request with Inline Payload
+```bash
+lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Inline Payload"
+```
+📎 **Sends 1000 POST requests** with a plain text payload
+
+---
+
+### 3️⃣ POST Request with File Payload
+```bash
+lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "Path:C:\Users\User\Desktop\LPS\urnice.json"
+```
+📎 **Sends 1000 POST requests** using a JSON file as payload
+
+---
+
+### 4️⃣ POST Request with Payload URL
+```bash
+lps --url https://www.example.com -rc 1000 --httpmethod "POST" --payload "URL:https://www.example.com/payload"
+```
+📎 **Sends 1000 POST requests** where the payload is fetched from a URL
+
+---
+
+# 🌐 Distributed Load Testing
+
+🌍 Distributed testing is supported starting from **v2.0.2_preview**.
+
+📖 Learn more in the [Distributed Load Testing Article](https://github.com/mohaidr/lps-docs/blob/main/articles/9.DistributedLoadTesting.md)
+
+---
+
+# 📚 LPS Documentation
+
+Explore full docs in the [📖 LPS Docs Repo](https://github.com/mohaidr/lps-docs/tree/main)
+
+### Key Sections:
+- 🧾 [Commands](https://github.com/mohaidr/lps-docs/blob/main/articles/1.Commands.md)
+- 📄 [Articles](https://github.com/mohaidr/lps-docs/tree/main/articles)
+- 🧠 [Concepts](https://github.com/mohaidr/lps-docs/tree/main/concepts)
+- 💡 [Examples](https://github.com/mohaidr/lps-docs/tree/main/examples)
