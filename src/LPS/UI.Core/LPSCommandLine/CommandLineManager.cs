@@ -17,6 +17,10 @@ using LPS.Infrastructure.LPSClients.GlobalVariableManager;
 using LPS.Infrastructure.LPSClients.PlaceHolderService;
 using AutoMapper;
 using LPS.AutoMapper;
+using LPS.Infrastructure.Nodes;
+using Apis.Common;
+using LPS.Common.Interfaces;
+using LPS.UI.Core.Services;
 
 namespace LPS.UI.Core.LPSCommandLine
 {
@@ -24,6 +28,8 @@ namespace LPS.UI.Core.LPSCommandLine
     {
         private string[] _command_args;
         readonly ILogger _logger;
+        IClusterConfiguration _clusterConfiguration;
+        ITestOrchestratorService _testOrchestratorService;
         readonly IClientManager<HttpRequest, HttpResponse, IClientService<HttpRequest, HttpResponse>> _httpClientManager;
         readonly IClientConfiguration<HttpRequest> _config;
         readonly IRuntimeOperationIdProvider _runtimeOperationIdProvider;
@@ -32,6 +38,7 @@ namespace LPS.UI.Core.LPSCommandLine
         Command _rootCliCommand;
         LpsCliCommand _lpsCliCommand;
         CreateCliCommand _createCliCommand;
+        INodeRegistry _nodeRegistry;
         RoundCliCommand _roundCliCommand;
         VariableCliCommand _variableCliCommand;
         CaptureCliCommand _captureCliCommand;
@@ -46,9 +53,18 @@ namespace LPS.UI.Core.LPSCommandLine
         readonly ICommandStatusMonitor<IAsyncCommand<HttpIteration>, HttpIteration> _httpIterationExecutionCommandStatusMonitor;
         readonly IPlaceholderResolverService _placeholderResolverService;
         readonly IMapper _mapper;
+        readonly IEntityDiscoveryService _entityDiscoveryService;
+        readonly ITestTriggerNotifier _testTriggerNotifier;
+        ITestExecutionService _testExecutionService;
         #pragma warning disable CS8618
         public CommandLineManager(
             string[] command_args,
+            ITestOrchestratorService testOrchestratorService,
+            ITestExecutionService testExecutionService,
+            INodeRegistry nodeRegistry,
+            IClusterConfiguration clusterConfiguration,
+            IEntityDiscoveryService entityDiscoveryService,
+            ITestTriggerNotifier testTriggerNotifier,
             ILogger logger,
             IClientManager<HttpRequest, HttpResponse,
             IClientService<HttpRequest, HttpResponse>> httpClientManager,
@@ -62,6 +78,12 @@ namespace LPS.UI.Core.LPSCommandLine
             IPlaceholderResolverService placeholderResolverService,
             CancellationTokenSource cts)
         {
+            _entityDiscoveryService = entityDiscoveryService;
+            _testOrchestratorService = testOrchestratorService;
+            _testExecutionService = testExecutionService;
+            _nodeRegistry = nodeRegistry;
+            _clusterConfiguration = clusterConfiguration;
+            _testTriggerNotifier = testTriggerNotifier;
             _logger = logger;
             _command_args = command_args.Select(arg => arg.ToLowerInvariant()).ToArray();
             _config = config;
@@ -90,11 +112,11 @@ namespace LPS.UI.Core.LPSCommandLine
         private void Configure()
         {
             _rootCliCommand = new Command("lps", "Load, Performance and Stress Testing Command Tool.");
-            _lpsCliCommand = new LpsCliCommand(_rootCliCommand, _logger, _httpClientManager, _config, _watchdog, _runtimeOperationIdProvider, _httpIterationExecutionCommandStatusMonitor, _lpsMonitoringEnroller, _placeholderResolverService, _appSettings.DashboardConfigurationOptions, _mapper, _cts, _command_args);
-            _createCliCommand = new CreateCliCommand(_rootCliCommand, _logger,  _runtimeOperationIdProvider, _placeholderResolverService);
+            _lpsCliCommand = new LpsCliCommand(_rootCliCommand, _logger, _runtimeOperationIdProvider, _testOrchestratorService);
+            _createCliCommand = new CreateCliCommand(_rootCliCommand, _logger, _runtimeOperationIdProvider, _placeholderResolverService);
             _roundCliCommand = new RoundCliCommand(_rootCliCommand, _logger, _runtimeOperationIdProvider, _placeholderResolverService);
             _iterationCliCommand = new IterationCliCommand(_rootCliCommand, _logger, _runtimeOperationIdProvider, _placeholderResolverService);
-            _runCliCommand = new RunCliCommand(_rootCliCommand, _logger, _httpClientManager, _config, _runtimeOperationIdProvider, _watchdog,_httpIterationExecutionCommandStatusMonitor, _lpsMonitoringEnroller, _appSettings.DashboardConfigurationOptions, _mapper, _variableManager, _placeholderResolverService, _cts);
+            _runCliCommand = new RunCliCommand(_rootCliCommand, _logger, _runtimeOperationIdProvider, _testOrchestratorService);
             _loggerCliCommand = new LoggerCliCommand(_rootCliCommand, _logger, _runtimeOperationIdProvider, _appSettings.LPSFileLoggerOptions);
             _httpClientCliCommand = new HttpClientCliCommand(_rootCliCommand, _logger, _runtimeOperationIdProvider, _appSettings.LPSHttpClientOptions);
             _watchdogCliCommand = new WatchDogCliCommand(_rootCliCommand, _logger, _runtimeOperationIdProvider, _appSettings.LPSWatchdogOptions);
@@ -141,7 +163,7 @@ namespace LPS.UI.Core.LPSCommandLine
                     _lpsCliCommand.SetHandler(cancellationToken);
                     break;
             }
-           await _rootCliCommand.InvokeAsync(_command_args);
+            await _rootCliCommand.InvokeAsync(_command_args);
         }
     }
 }

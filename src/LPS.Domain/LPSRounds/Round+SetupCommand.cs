@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
@@ -72,6 +73,7 @@ namespace LPS.Domain
                 }
 
                 Iterations.Add(iteration);
+                _lpsMetricsDataMonitor.TryRegister(this.Name, (HttpIteration)iteration);
             }
             else {
                 _logger.Log(_runtimeOperationIdProvider.OperationId, $"In the Round '{roundName}', the referenced LPS Entity of type {typeof(HttpIteration)} is either null or invalid.", LPSLoggingLevel.Error);

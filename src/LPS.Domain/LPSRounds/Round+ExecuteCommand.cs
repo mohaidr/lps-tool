@@ -118,7 +118,7 @@ namespace LPS.Domain
             }
         }
 
-        async Task SchedualHttpIterationForExecution(IClientService<HttpRequest, HttpResponse> httpClient, DateTime executionTime)
+        private async Task SchedualHttpIterationForExecution(IClientService<HttpRequest, HttpResponse> httpClient, DateTime executionTime)
         {
             List<Task> awaitableTasks = [];
             foreach (var httpIteration in this.Iterations.Where(iteration=> iteration.Type == IterationType.Http))

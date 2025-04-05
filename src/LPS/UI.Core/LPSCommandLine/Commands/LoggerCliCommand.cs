@@ -61,7 +61,7 @@ namespace LPS.UI.Core.LPSCommandLine.Commands
 
                 if (!validationResults.IsValid)
                 {
-                    _logger.Log(_runtimeOperationIdProvider.OperationId, "You must update the below properties to have a valid logger configuration. Updating the LPSAppSettings:LPSFileLoggerConfiguration section with the provided arguements will create an invalid logger configuration. You may run 'lps logger -h' to explore the options", LPSLoggingLevel.Warning);
+                    _logger.Log(_runtimeOperationIdProvider.OperationId, "You must update the below properties to have a valid logger configuration. Updating the LPSAppSettings:FileLogger section with the provided arguements will create an invalid logger configuration. You may run 'lps logger -h' to explore the options", LPSLoggingLevel.Warning);
                     validationResults.PrintValidationErrors();
                 }
                 else

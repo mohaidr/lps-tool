@@ -12,27 +12,22 @@ namespace LPS.Infrastructure.LPSClients
 {
     public class HttpClientConfiguration : ILPSHttpClientConfiguration<HttpRequest>
     {
-        private readonly TimeSpan _pooledConnectionLifetime;
-        private readonly TimeSpan _pooledConnectionIdleTimeout;
-        private readonly int _maxConnectionsPerServer;
-        private readonly TimeSpan _timeout;
-
         private HttpClientConfiguration()
         {
-            _pooledConnectionLifetime = TimeSpan.FromSeconds(1500);
-            _pooledConnectionIdleTimeout = TimeSpan.FromSeconds(300);
-            _maxConnectionsPerServer = 1000;
-            _timeout = TimeSpan.FromSeconds(240);
+            PooledConnectionLifetime = TimeSpan.FromSeconds(1500);
+            PooledConnectionIdleTimeout = TimeSpan.FromSeconds(300);
+            MaxConnectionsPerServer = 1000;
+            Timeout = TimeSpan.FromSeconds(240);
 
         }
 
         public HttpClientConfiguration(TimeSpan pooledConnectionLifetime, TimeSpan pooledConnectionIdleTimeout,
            int maxConnectionsPerServer, TimeSpan timeout)
         {
-            _pooledConnectionLifetime = pooledConnectionLifetime;
-            _pooledConnectionIdleTimeout = pooledConnectionIdleTimeout;
-            _maxConnectionsPerServer = maxConnectionsPerServer;
-            _timeout = timeout;
+            PooledConnectionLifetime = pooledConnectionLifetime;
+            PooledConnectionIdleTimeout = pooledConnectionIdleTimeout;
+            MaxConnectionsPerServer = maxConnectionsPerServer;
+            Timeout = timeout;
         }
 
         public static HttpClientConfiguration GetDefaultInstance()
@@ -40,9 +35,9 @@ namespace LPS.Infrastructure.LPSClients
             return new HttpClientConfiguration();
         }
 
-        public TimeSpan PooledConnectionLifetime { get { return _pooledConnectionLifetime; } }
-        public TimeSpan PooledConnectionIdleTimeout { get { return _pooledConnectionIdleTimeout; } }
-        public int MaxConnectionsPerServer { get { return _maxConnectionsPerServer; } }
-        public TimeSpan Timeout { get { return _timeout; } }
+        public TimeSpan PooledConnectionLifetime { get; }
+        public TimeSpan PooledConnectionIdleTimeout { get; }
+        public int MaxConnectionsPerServer { get; }
+        public TimeSpan Timeout { get; }
     }
 }

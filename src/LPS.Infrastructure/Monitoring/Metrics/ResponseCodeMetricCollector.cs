@@ -32,12 +32,12 @@ namespace LPS.Infrastructure.Monitoring.Metrics
         public override LPSMetricType MetricType => LPSMetricType.ResponseCode;
         private ProtectedResponseCodeDimensionSet _dimensionSet { get; set; }
 
-        public IResponseMetricCollector Update(HttpResponse response)
+        public IResponseMetricCollector Update(HttpResponse.SetupCommand response)
         {
             return UpdateAsync(response).Result;
         }
 
-        public async Task<IResponseMetricCollector> UpdateAsync(HttpResponse response)
+        public async Task<IResponseMetricCollector> UpdateAsync(HttpResponse.SetupCommand response)
         {
             await _semaphore.WaitAsync();
             try
@@ -81,7 +81,7 @@ namespace LPS.Infrastructure.Monitoring.Metrics
                 HttpVersion = httpVersion;
             }
 
-            public void Update(HttpResponse response)
+            public void Update(HttpResponse.SetupCommand response)
             {
                 var existingSummary = _responseSummaries.FirstOrDefault(rs => rs.HttpStatusCode == ((int)response.StatusCode).ToString() && rs.HttpStatusReason == response.StatusMessage);
                 if (existingSummary != null)

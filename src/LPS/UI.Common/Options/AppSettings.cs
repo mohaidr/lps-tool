@@ -8,8 +8,8 @@ namespace LPS.UI.Common.Options
 {
     public class AppSettings
     {
-        public HttpClientOptions LPSHttpClientConfiguration { get; set; }
-        public FileLoggerOptions LPSFileLoggerConfiguration { get; set;}
-        public WatchdogOptions LPSWatchdogConfiguration { get; set; }
+        public HttpClientOptions HttpClient { get; set; }
+        public FileLoggerOptions FileLogger { get; set;}
+        public WatchdogOptions Watchdog { get; set; }
     }
 }

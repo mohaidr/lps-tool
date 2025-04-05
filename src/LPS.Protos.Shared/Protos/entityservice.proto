@@ -1,0 +1,40 @@
+﻿syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "LPS.Protos.Shared";
+
+
+package nodes;
+
+
+service EntityDiscoveryProtoService {
+    rpc AddEntityDiscoveryRecord (EntityDiscoveryRecord) returns (google.protobuf.Empty);
+    rpc DiscoverEntity (EntityDiscoveryQuery) returns (EntityDiscoveryRecordResponse);
+}
+
+message EntityDiscoveryRecord {
+    string fully_qualified_name = 1;
+    string round_id = 2;
+    string iteration_id = 3;
+    string request_id = 4;
+    Node node = 5;
+}
+
+message EntityDiscoveryQuery {
+    string fully_qualified_name = 1;
+}
+
+
+message EntityDiscoveryRecordResponse {
+    string fully_qualified_name = 1;
+    string round_id = 2;
+    string iteration_id = 3;
+    string request_id = 4;
+    Node node = 5;
+}
+
+message Node {
+    string name = 1;
+    string nodeIP = 2;
+}

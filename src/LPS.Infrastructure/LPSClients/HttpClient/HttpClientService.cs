@@ -217,7 +217,7 @@ namespace LPS.Infrastructure.LPSClients
                         lpsHttpResponse.SetHttpRequest(httpRequestEntity);
 
                         //Update Response Break Down Metrics
-                        await _metricsService.TryUpdateResponseMetricsAsync(httpRequestEntity.Id, lpsHttpResponse, linkedCts.Token);
+                        await _metricsService.TryUpdateResponseMetricsAsync(httpRequestEntity.Id, responseCommand, linkedCts.Token);
 
                         await _logger.LogAsync(_runtimeOperationIdProvider.OperationId, $"Client: {SessionId} - Request ID: {httpRequestEntity.Id} {httpRequestMessage?.Method} {httpRequestMessage?.RequestUri} Http/{httpRequestMessage?.Version}\n\tTotal Time: {responseCommand?.TotalTime.TotalMilliseconds} MS\n\tStatus Code: {(int)responseMessage?.StatusCode} Reason: {responseMessage?.ReasonPhrase}\n\tResponse Body: {responseCommand?.LocationToResponse}\n\tResponse Headers: {responseMessage?.Headers}{responseMessage?.Content?.Headers}", LPSLoggingLevel.Verbose, token);
                         //Update Throughput Metrics
@@ -242,7 +242,7 @@ namespace LPS.Infrastructure.LPSClients
 
                 lpsHttpResponse = new HttpResponse(lpsResponseCommand, _logger, _runtimeOperationIdProvider);
                 lpsHttpResponse.SetHttpRequest(httpRequestEntity);
-                await _metricsService.TryUpdateResponseMetricsAsync(httpRequestEntity.Id, lpsHttpResponse, token);
+                await _metricsService.TryUpdateResponseMetricsAsync(httpRequestEntity.Id, lpsResponseCommand, token);
 
 
                 if (ex.Message.Contains("socket") || ex.Message.Contains("buffer") || ex.InnerException != null && (ex.InnerException.Message.Contains("socket") || ex.InnerException.Message.Contains("buffer")))

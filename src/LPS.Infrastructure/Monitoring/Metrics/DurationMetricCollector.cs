@@ -1,22 +1,12 @@
 ﻿using HdrHistogram;
 using LPS.Domain;
-using LPS.Infrastructure.Common;
 using LPS.Infrastructure.Common.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Spectre.Console;
-using System.Diagnostics.Tracing;
 using LPS.Infrastructure.Monitoring.EventSources;
 using LPS.Domain.Common.Interfaces;
-using System.Diagnostics;
-using System.Timers;
 using System.Text.Json.Serialization;
-using System.Net;
 namespace LPS.Infrastructure.Monitoring.Metrics
 {
 
@@ -38,7 +28,7 @@ namespace LPS.Infrastructure.Monitoring.Metrics
         protected override IDimensionSet DimensionSet => _dimensionSet;
 
         public override LPSMetricType MetricType => LPSMetricType.ResponseTime;
-        public async Task<IResponseMetricCollector> UpdateAsync(HttpResponse response)
+        public async Task<IResponseMetricCollector> UpdateAsync(HttpResponse.SetupCommand response)
         {
             await _semaphore.WaitAsync();
             try
@@ -53,7 +43,7 @@ namespace LPS.Infrastructure.Monitoring.Metrics
             return this;
         }
 
-        public IResponseMetricCollector Update(HttpResponse httpResponse)
+        public IResponseMetricCollector Update(HttpResponse.SetupCommand httpResponse)
         {
             return UpdateAsync(httpResponse).Result;
         }

@@ -1,41 +1,49 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="bin\**" />
-    <EmbeddedResource Remove="bin\**" />
-    <None Remove="bin\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="bin\**" />
+		<EmbeddedResource Remove="bin\**" />
+		<None Remove="bin\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="UIUtilities\HttpConcurrentTestUtility.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="UIUtilities\HttpConcurrentTestUtility.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="fixedlpslog.Log" />
-    <None Remove="LPS.rar" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="fixedlpslog.Log" />
+		<None Remove="LPS.rar" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="FluentValidation" Version="11.10.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
-    <PackageReference Include="YamlDotNet" Version="16.1.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+		<PackageReference Include="FluentValidation" Version="11.10.0" />
+		<PackageReference Include="Google.Protobuf" Version="3.29.3" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.67.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.69.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+		<PackageReference Include="YamlDotNet" Version="16.1.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Dashboard\Apis.csproj" />
-    <ProjectReference Include="..\LPS.Domain\LPS.Domain.csproj" />
-    <ProjectReference Include="..\LPS.Infrastructure\LPS.Infrastructure.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Apis\Apis.csproj" />
+		<ProjectReference Include="..\LPS.Common\LPS.Common.csproj" />
+		<ProjectReference Include="..\LPS.Domain\LPS.Domain.csproj" />
+		<ProjectReference Include="..\LPS.Infrastructure\LPS.Infrastructure.csproj" />
+		<ProjectReference Include="..\LPS.Protos.Shared\LPS.Protos.Shared.csproj" />
+	</ItemGroup>
 
 </Project>

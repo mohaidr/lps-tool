@@ -13,7 +13,7 @@ namespace LPS.Infrastructure.Common.Interfaces
     {
         ValueTask<bool> TryIncreaseConnectionsCountAsync(Guid requestId, CancellationToken token);
         ValueTask<bool> TryDecreaseConnectionsCountAsync(Guid requestId, bool isSuccessful, CancellationToken token);
-        ValueTask<bool> TryUpdateResponseMetricsAsync(Guid requestId, HttpResponse response, CancellationToken token);
+        ValueTask<bool> TryUpdateResponseMetricsAsync(Guid requestId, HttpResponse.SetupCommand response, CancellationToken token);
         ValueTask<bool> TryUpdateDataSentAsync(Guid requestId, double dataSize, double uploadTime, CancellationToken token);
         ValueTask<bool> TryUpdateDataReceivedAsync(Guid requestId, double dataSize, double downloadTime, CancellationToken token);
 

@@ -58,7 +58,7 @@ namespace LPS.UI.Core.LPSCommandLine.Commands
 
                 if (!validationResults.IsValid)
                 {
-                    _logger.Log(_runtimeOperationIdProvider.OperationId, "You must update the below properties to have a valid http client configuration. Updating the LPSAppSettings:LPSHttpClientConfiguration section with the provided arguements will create an invalid http client configuration. You may run 'lps httpclient -h' to explore the options", LPSLoggingLevel.Warning);
+                    _logger.Log(_runtimeOperationIdProvider.OperationId, "You must update the below properties to have a valid http client configuration. Updating the LPSAppSettings:HttpClient section with the provided arguements will create an invalid http client configuration. You may run 'lps httpclient -h' to explore the options", LPSLoggingLevel.Warning);
                     validationResults.PrintValidationErrors();
                 }
                 else

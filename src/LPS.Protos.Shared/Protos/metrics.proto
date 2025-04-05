@@ -1,0 +1,43 @@
+﻿syntax = "proto3";
+import "google/protobuf/duration.proto";
+
+option csharp_namespace = "LPS.Protos.Shared";
+
+package metrics;
+
+service MetricsProtoService {
+    rpc UpdateConnections(UpdateConnectionsRequest) returns (UpdateConnectionsResponse);
+    rpc UpdateResponseMetrics(UpdateResponseMetricsRequest) returns (UpdateResponseMetricsResponse);
+    rpc UpdateDataTransmission(UpdateDataTransmissionRequest) returns (UpdateDataTransmissionResponse);
+}
+
+message UpdateConnectionsRequest {
+    string request_id = 1;
+    bool increase = 2;
+    bool is_successful = 3;
+}
+
+message UpdateConnectionsResponse {
+    bool success = 1;
+}
+
+message UpdateResponseMetricsRequest {
+    string request_id = 1;
+    int32 response_code = 2;
+    google.protobuf.Duration response_time = 3;
+}
+
+message UpdateResponseMetricsResponse {
+    bool success = 1;
+}
+
+message UpdateDataTransmissionRequest {
+    string request_id = 1;
+    double data_size = 2;
+    double time_taken = 3;
+    bool is_sent = 4;  // true = sent, false = received
+}
+
+message UpdateDataTransmissionResponse {
+    bool success = 1;
+}

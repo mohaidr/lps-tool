@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LPS.Domain.LPSRequest.LPSHttpRequest
 {
-    public class URL: IValueObject
+    public class URL : IValueObject
     {
         public URL(string url)
         {
@@ -32,7 +32,7 @@ namespace LPS.Domain.LPSRequest.LPSHttpRequest
             }
         }
 
-        public string BaseUrl => string.Concat(Schema, $"{(!string.IsNullOrEmpty(Schema)?"://":string.Empty)}", HostName);
+        public string BaseUrl => string.Concat(Schema, $"{(!string.IsNullOrEmpty(Schema) ? "://" : string.Empty)}", HostName);
         public string Url { get; private set; }
         public string HostName { get; private set; }
         public string Schema { get; private set; }
@@ -42,17 +42,38 @@ namespace LPS.Domain.LPSRequest.LPSHttpRequest
         private void ParseRest(string rest)
         {
             var queryIndex = rest.IndexOf('?');
-
-            // Separate path and query
             var path = queryIndex >= 0 ? rest.Substring(0, queryIndex) : rest;
             var query = queryIndex >= 0 ? rest.Substring(queryIndex + 1) : string.Empty;
 
-            // Parse hostname and path
             var pathParts = path.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (pathParts.Length > 0)
             {
-                HostName = IsPlaceholder(pathParts[0]) || IsValidHostname(pathParts[0]) ? pathParts[0] : null;
+                var hostPart = pathParts[0];
+                string host = hostPart;
+                string port = null;
+
+                // Split host and port (e.g., "example.com:5000" → host="example.com", port="5000")
+                var colonIndex = hostPart.LastIndexOf(':');
+                if (colonIndex > 0)
+                {
+                    host = hostPart.Substring(0, colonIndex);
+                    port = hostPart.Substring(colonIndex + 1);
+                }
+                // Validate host (without port)
+                bool isValidHost = IsPlaceholder(host) || IsValidHostname(host);
+                bool isValidPort = port == null || int.TryParse(port, out _);
+
+                // Retain original hostPart (with port) if valid
+                if (isValidHost && isValidPort)
+                {
+                    HostName = hostPart; // e.g., "example.com:5000"
+                }
+                else
+                {
+                    HostName = null; // Invalid host/port → truncates BaseUrl
+                }
+
                 PathParameters = pathParts.Skip(1).ToList();
             }
 
@@ -60,15 +81,12 @@ namespace LPS.Domain.LPSRequest.LPSHttpRequest
             if (!string.IsNullOrEmpty(query))
             {
                 QueryParameters = query.Split('&')
-                                       .Select(q =>
-                                       {
-                                           var parts = q.Split('=', 2);
-                                           return new KeyValuePair<string, string>(
-                                               parts[0],
-                                               parts.Length > 1 ? parts[1] : string.Empty
-                                           );
-                                       })
-                                       .ToList();
+                    .Select(q =>
+                    {
+                        var parts = q.Split('=', 2);
+                        return new KeyValuePair<string, string>(parts[0], parts.Length > 1 ? parts[1] : "");
+                    })
+                    .ToList();
             }
         }
 
@@ -80,7 +98,7 @@ namespace LPS.Domain.LPSRequest.LPSHttpRequest
         private bool IsValidSchema(string value)
         {
             // Validate common schemas like http, https, ftp, etc.
-            return new[] { "http", "https", "ftp" }.Contains(value.ToLower());
+            return new[] { "http", "https" }.Contains(value.ToLower());
         }
 
         private bool IsValidHostname(string value)

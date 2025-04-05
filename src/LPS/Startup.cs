@@ -20,7 +20,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using LPS.UI.Core;
-using Dashboard.Common;
+using Apis.Common;
 using System.Reflection;
 using LPS.Infrastructure.Common.Interfaces;
 using LPS.Infrastructure.Caching;
@@ -34,6 +34,17 @@ using LPS.Infrastructure.LPSClients.GlobalVariableManager;
 using LPS.Infrastructure.LPSClients.PlaceHolderService;
 using LPS.Infrastructure.LPSClients.SessionManager;
 using LPS.Infrastructure.Monitoring.MetricsServices;
+using LPS.Infrastructure.Nodes;
+using Microsoft.Extensions.Options;
+using Google.Protobuf.WellKnownTypes;
+using System.Diagnostics.Metrics;
+using LPS.UI.Core.LPSValidators;
+using FluentValidation;
+using LPS.UI.Core.Services;
+using LPS.Common.Services;
+using LPS.Common.Interfaces;
+using LPS.Infrastructure.GRPCClients.Factory;
+
 
 
 namespace LPS
@@ -45,10 +56,13 @@ namespace LPS
             var host = Host.CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    var contentRoot = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                    webBuilder
+                      .UseStartup<Apis.Startup>()
+                      .UseStaticWebAssets();
+
+                    var contentRoot = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
                     ArgumentNullException.ThrowIfNull(contentRoot);
                     webBuilder.UseContentRoot(contentRoot);
-
                     var webRoot = Path.Combine(contentRoot, "wwwroot");
                     webBuilder.UseWebRoot(webRoot);
 
@@ -58,19 +72,26 @@ namespace LPS
                         .Build();
 
                     var dashboardOptions = configuration
-                        .GetSection("LPSAppSettings:LPSDashboardConfiguration")
+                        .GetSection("LPSAppSettings:Dashboard")
                         .Get<DashboardConfigurationOptions>();
 
-                    var port = dashboardOptions?.Port ?? GlobalSettings.Port;
+                    var port =  dashboardOptions?.Port ?? GlobalSettings.DefaultDashboardPort;
 
-                    webBuilder.UseSetting("http_port", port.ToString())
-                              .UseStartup<LPS.Dashboard.Startup>()
-                              .UseStaticWebAssets();
+                    var clusterOptions = configuration
+                        .GetSection("LPSAppSettings:Cluster")
+                        .Get<ClusterConfigurationOptions>();
+
+                    var gRPCPort = (clusterOptions!=null && new ClusteredConfigurationValidator().Validate(clusterOptions).IsValid) ? clusterOptions.GRPCPort.Value : GlobalSettings.DefaultGRPCPort ;
 
                     webBuilder.ConfigureKestrel(serverOptions =>
                     {
+                        serverOptions.ListenAnyIP(gRPCPort, listenOptions =>
+                        {
+                            listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
+                        });
                         serverOptions.ListenAnyIP(port);
                         serverOptions.AllowSynchronousIO = false;
+
                     })
                     .UseShutdownTimeout(TimeSpan.FromSeconds(30));
                 })
@@ -87,6 +108,8 @@ namespace LPS
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddSingleton<ICustomGrpcClientFactory, CustomGrpcClientFactory>();
+                    services.AddSingleton<IEntityDiscoveryService, EntityDiscoveryService>();
                     services.AddSingleton<IMetricsRepository, MetricsRepository>();
                     services.AddSingleton<IMetricsDataMonitor, MetricsDataMonitor>();
                     services.AddSingleton<IMetricsQueryService, MetricsQueryService>();
@@ -102,6 +125,9 @@ namespace LPS
                     {
                         SizeLimit = 1024
                     }));
+                    services.AddSingleton<INodeRegistry, NodeRegistry>();
+                    services.AddSingleton<ITestTriggerNotifier, TestTriggerNotifier>();
+                    services.AddSingleton<INodeMetadata, NodeMetadata>();
                     services.AddSingleton<IClientManager<Domain.HttpRequest, Domain.HttpResponse, IClientService<Domain.HttpRequest, Domain.HttpResponse>>, HttpClientManager>();
                     services.AddSingleton<IRuntimeOperationIdProvider, RuntimeOperationIdProvider>();
                     services.AddSingleton<IHttpHeadersService, HttpHeadersService>();
@@ -113,11 +139,14 @@ namespace LPS
                     services.AddSingleton<IPlaceholderResolverService, PlaceholderResolverService>();
                     services.AddSingleton<ISessionManager, SessionManager>();
                     services.AddSingleton<IVariableManager, VariableManager>();
-                    services.ConfigureWritable<DashboardConfigurationOptions>(hostContext.Configuration.GetSection("LPSAppSettings:LPSDashboardConfiguration"), AppConstants.AppSettingsFileLocation);
-                    services.ConfigureWritable<FileLoggerOptions>(hostContext.Configuration.GetSection("LPSAppSettings:LPSFileLoggerConfiguration"), AppConstants.AppSettingsFileLocation);
-                    services.ConfigureWritable<WatchdogOptions>(hostContext.Configuration.GetSection("LPSAppSettings:LPSWatchdogConfiguration"), AppConstants.AppSettingsFileLocation);
-                    services.ConfigureWritable<HttpClientOptions>(hostContext.Configuration.GetSection("LPSAppSettings:LPSHttpClientConfiguration"), AppConstants.AppSettingsFileLocation);
-                    services.AddHostedService(p => p.ResolveWith<HostedService>(new { args }));
+                    services.AddSingleton<ITestExecutionService, TestExecutionService>();
+                    services.AddSingleton<ITestOrchestratorService, TestOrchestratorService>();
+                    services.AddSingleton<IDashboardService, DashboardService>();
+                    services.ConfigureWritable<DashboardConfigurationOptions>(hostContext.Configuration.GetSection("LPSAppSettings:Dashboard"), AppConstants.AppSettingsFileLocation);
+                    services.ConfigureWritable<FileLoggerOptions>(hostContext.Configuration.GetSection("LPSAppSettings:FileLogger"), AppConstants.AppSettingsFileLocation);
+                    services.ConfigureWritable<WatchdogOptions>(hostContext.Configuration.GetSection("LPSAppSettings:Watchdog"), AppConstants.AppSettingsFileLocation);
+                    services.ConfigureWritable<HttpClientOptions>(hostContext.Configuration.GetSection("LPSAppSettings:HttpClient"), AppConstants.AppSettingsFileLocation);
+                    services.AddHostedService(isp => isp.ResolveWith<HostedService>(new { args }));
                     if (hostContext.HostingEnvironment.IsProduction())
                     {
                         //add production dependencies
@@ -127,15 +156,15 @@ namespace LPS
                         // add development dependencies
                     }
                 })
-                .ConfigureLPSFileLogger()
-                .ConfigureLPSWatchdog()
-                .ConfigureLPSHttpClient()
+                .UseFileLogger()
+                .UseWatchdog()
+                .UseHttpClient()
+                .UseClusterConfiguration()
                 .UseConsoleLifetime(options => options.SuppressStatusMessages = true)
                .Build();
 
             return host;
         }
-
         private static void CreateDefaultAppSettings(string filePath)
         {
             // Get the directory path

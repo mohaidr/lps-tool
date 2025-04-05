@@ -9,7 +9,9 @@ namespace LPS.Domain.Common.Interfaces
     public interface IMetricsDataMonitor
     {
         public bool TryRegister(string roundName, HttpIteration lpsHttpIteration);
-        public void Monitor(HttpIteration lpsHttpIteration, string executionId);
-        public void Stop(HttpIteration lpsHttpIteration, string executionId);
+        public void Monitor(HttpIteration lpsHttpIteration);
+        public void Monitor(Func<HttpIteration, bool> predicate);
+        public void Stop(HttpIteration lpsHttpIteration);
+        public void Stop(Func<HttpIteration, bool> predicate);
     }
 }

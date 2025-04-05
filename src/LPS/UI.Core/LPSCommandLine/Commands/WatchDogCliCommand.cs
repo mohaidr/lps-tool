@@ -68,7 +68,7 @@ namespace LPS.UI.Core.LPSCommandLine.Commands
                 var validationResults = watchdogValidator.Validate(watchdoOptions);
                 if (!validationResults.IsValid)
                 {
-                    _logger.Log(_runtimeOperationIdProvider.OperationId, "You must update the below properties to have a valid watchdog configuration. Updating the LPSAppSettings:LPSWatchdogConfiguration section with the provided arguements will create an invalid watchdog configuration. You may run 'lps watchdog -h' to explore the options", LPSLoggingLevel.Warning);
+                    _logger.Log(_runtimeOperationIdProvider.OperationId, "You must update the below properties to have a valid watchdog configuration. Updating the LPSAppSettings:WatchDog section with the provided arguements will create an invalid watchdog configuration. You may run 'lps watchdog -h' to explore the options", LPSLoggingLevel.Warning);
                     validationResults.PrintValidationErrors();
                 }
                 else

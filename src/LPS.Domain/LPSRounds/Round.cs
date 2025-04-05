@@ -28,12 +28,14 @@ namespace LPS.Domain
         CancellationTokenSource _cts;
         public Round(SetupCommand command, 
             ILogger logger,
+            IMetricsDataMonitor lpsMetricsDataMonitor,
             IRuntimeOperationIdProvider runtimeOperationIdProvider)
         {
             ArgumentNullException.ThrowIfNull(command);
             Iterations = new List<Iteration>();
             _runtimeOperationIdProvider = runtimeOperationIdProvider;
             _logger = logger;
+            _lpsMetricsDataMonitor = lpsMetricsDataMonitor;
             Id = Guid.NewGuid();
             this.Setup(command);
         }
