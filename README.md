@@ -1,7 +1,7 @@
 
 # 🚨 Important Notice
 
-> **⚠️ Warning:** This documentation applies **only** to **version 2.0_Preview** of the **LPS Tool**.
+> **⚠️ Warning:** This documentation applies **only** to **version 2.0_Preview** and above of the **LPS Tool**.
 > For earlier versions, please visit the [`readme.md`](https://github.com/mohaidr/lps-tool/tree/main/Version) in each version's directory.
 > 
 > ⚠️ **Note:** Version **2.x is NOT backward compatible** with 1.x.
