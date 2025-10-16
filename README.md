@@ -26,33 +26,58 @@ Welcome to the **LPS Tool** – your ultimate companion for **Load**, **Performa
 
 🧭 **LPS Tool is cross-platform** – it works on **Windows**, **Linux**, and **macOS**!
 
-### 🛠️ Steps to Install:
-1. ⬇️ Download the latest version of LPS Tool from the [Versions Directory](https://github.com/mohaidr/lps-tool/tree/main/Version)
-2. 📂 Save it to your desired directory
-3. 🧩 Install [.NET 8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+## 🛠️ Quick Install (Recommended)
 
-### 🖥️ Optional:
-To use the `lps` command from any directory:
+You can now install the **LPS Tool** directly from **NuGet** as a global .NET CLI tool:
 
-#### 🪟 On Windows:
+```bash
+dotnet tool install --global lps
+```
+
+✅ **Requirements:**  
+Make sure you have [.NET 8 SDK or Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) installed on your machine.
+
+After installation, you can run LPS from anywhere using:
+
+```bash
+lps --version
+```
+
+---
+
+## 🖥️ Manual Installation (Optional)
+
+If you prefer manual setup:
+
+1. ⬇️ Download the latest version from the [Versions Directory](https://github.com/mohaidr/lps-tool/tree/main/Version)  
+2. 📂 Save it to your desired directory  
+3. 🧩 Ensure [.NET 8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) is installed  
+
+---
+
+## ⚙️ Environment Setup (Only for Manual Install)
+
+### 🪟 On Windows:
 - Open **Terminal as Administrator**
-- Run the `env.ps1` script
-- If script execution is restricted, enable it with:
+- Run the `env.ps1` script  
+- If execution is restricted:
   ```powershell
   Set-ExecutionPolicy Unrestricted
   ```
-- To restore the default setting:
+  Restore it later with:
   ```powershell
   Set-ExecutionPolicy Restricted
   ```
 
-#### 🐧 On Linux/macOS:
-- Run the `env.sh` script in your terminal:
-  ```bash
-  source ./env.sh
-  ```
+### 🐧 On Linux/macOS:
+Run in terminal:
+```bash
+source ./env.sh
+```
 
-4. ✅ Done! You can now use `lps` from any directory.
+---
+
+✨ **That’s it!** You’re ready to start load testing with **LPS Tool**.
 
 ---
 
