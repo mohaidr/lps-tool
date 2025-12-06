@@ -6,6 +6,8 @@
 > 
 > ⚠️ **Note:** Version **2.x is NOT backward compatible** with 1.x.
 
+> **🔄 Breaking Change in v3.0.2.6:** The `failureCriteria` and old `terminationRules` formats have been **permanently removed**. The last version supporting the old format was **v3.0.2.5**. See the [Migration Guide](https://github.com/mohaidr/lps-docs/blob/main/articles/10.MigrationGuide.md) for details on the new `failureRules` and `terminationRules` inline metric expression format.
+
 ---
 
 # 🚀 Introduction
@@ -132,3 +134,4 @@ Explore full docs in the [📖 LPS Docs Repo](https://github.com/mohaidr/lps-doc
 - 📄 [Articles](https://github.com/mohaidr/lps-docs/tree/main/articles)
 - 🧠 [Concepts](https://github.com/mohaidr/lps-docs/tree/main/concepts)
 - 💡 [Examples](https://github.com/mohaidr/lps-docs/tree/main/examples)
+- 🔄 [Migration Guide](https://github.com/mohaidr/lps-docs/blob/main/articles/10.MigrationGuide.md) - Upgrading from v3.0.2.5 to v3.0.2.6+
