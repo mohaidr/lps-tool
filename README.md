@@ -1,14 +1,4 @@
 
-# 🚨 Important Notice
-
-> **⚠️ Warning:** This documentation applies **only** to **version 2.0_Preview** and above of the **LPS Tool**.
-> For earlier versions, please visit the [`readme.md`](https://github.com/mohaidr/lps-tool/tree/main/Version) in each version's directory.
-> 
-> ⚠️ **Note:** Version **2.x is NOT backward compatible** with 1.x.
-
-> **🔄 Breaking Change in v3.0.2.6:** The `failureCriteria` and old `terminationRules` formats have been **permanently removed**. The last version supporting the old format was **v3.0.2.5**. See the [Migration Guide](https://github.com/mohaidr/lps-docs/blob/main/articles/10.MigrationGuide.md) for details on the new `failureRules` and `terminationRules` inline metric expression format.
-
----
 
 # 🚀 Introduction
 
@@ -45,43 +35,7 @@ After installation, you can run LPS from anywhere using:
 lps --version
 ```
 
----
 
-## 🖥️ Manual Installation (Optional)
-
-If you prefer manual setup:
-
-1. ⬇️ Download the latest version from the [Versions Directory](https://github.com/mohaidr/lps-tool/tree/main/Version)  
-2. 📂 Save it to your desired directory  
-3. 🧩 Ensure [.NET 8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) is installed  
-
----
-
-## ⚙️ Environment Setup (Only for Manual Install)
-
-### 🪟 On Windows:
-- Open **Terminal as Administrator**
-- Run the `env.ps1` script  
-- If execution is restricted:
-  ```powershell
-  Set-ExecutionPolicy Unrestricted
-  ```
-  Restore it later with:
-  ```powershell
-  Set-ExecutionPolicy Restricted
-  ```
-
-### 🐧 On Linux/macOS:
-Run in terminal:
-```bash
-source ./env.sh
-```
-
----
-
-✨ **That’s it!** You’re ready to start load testing with **LPS Tool**.
-
----
 
 # ⚡ Quick Test Examples
 
@@ -135,3 +89,15 @@ Explore full docs in the [📖 LPS Docs Repo](https://github.com/mohaidr/lps-doc
 - 🧠 [Concepts](https://github.com/mohaidr/lps-docs/tree/main/concepts)
 - 💡 [Examples](https://github.com/mohaidr/lps-docs/tree/main/examples)
 - 🔄 [Migration Guide](https://github.com/mohaidr/lps-docs/blob/main/articles/10.MigrationGuide.md) - Upgrading from v3.0.2.5 to v3.0.2.6+
+
+
+# 🚨 Important Notice
+
+> **⚠️ Warning:** This documentation applies **only** to **version 2.0_Preview** and above of the **LPS Tool**.
+> For earlier versions, please visit the [`readme.md`](https://github.com/mohaidr/lps-tool/tree/main/Version) in each version's directory.
+> 
+> ⚠️ **Note:** Version **2.x is NOT backward compatible** with 1.x.
+
+> **🔄 Breaking Change in v3.0.2.6:** The `failureCriteria` and old `terminationRules` formats have been **permanently removed**. The last version supporting the old format was **v3.0.2.5**. See the [Migration Guide](https://github.com/mohaidr/lps-docs/blob/main/articles/10.MigrationGuide.md) for details on the new `failureRules` and `terminationRules` inline metric expression format.
+
+---
